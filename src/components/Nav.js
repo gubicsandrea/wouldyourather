@@ -10,21 +10,28 @@ class Nav extends Component {
   };
 
   render() {
-    const { authedUser } = this.props;
+    const { authedUser, user } = this.props;
     return (
       <div>
         <Link to="/">Home page</Link>
         <Link to="/add">Ask a question</Link>
         <Link to="/leaderboard">Leaderboard</Link>
-        {authedUser && <span onClick={this.handleLogout}>Logout</span>}
+        {authedUser && (
+          <div>
+            Hello, {user.name}
+            <img src={user.avatarURL} alt="avatar" />
+            <span onClick={this.handleLogout}>Logout</span>
+          </div>
+        )}
       </div>
     );
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, users }) {
   return {
-    authedUser
+    authedUser,
+    user: authedUser ? users[authedUser] : null
   };
 }
 
