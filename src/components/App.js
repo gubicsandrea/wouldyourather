@@ -6,6 +6,7 @@ import LoadingBar from "react-redux-loading";
 import LoginPage from "./LoginPage";
 import HomePage from "./HomePage";
 import Nav from "./Nav";
+import Poll from "./Poll";
 
 class App extends Component {
   componentDidMount() {
@@ -22,6 +23,7 @@ class App extends Component {
               <Nav />
               <Route path="/" exact component={HomePage} />
               <Route path="/login" component={LoginPage} />
+              <Route path="/question/:id" component={Poll} />
             </div>
           )}
         </Fragment>
