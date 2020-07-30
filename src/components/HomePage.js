@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import Question from "./Question";
 
 class HomePage extends Component {
   state = {
@@ -40,7 +41,9 @@ class HomePage extends Component {
         </button>
         <ul>
           {questionIds.map(id => (
-            <li key={id}>{id}</li>
+            <li key={id}>
+              <Question questionId={id} />
+            </li>
           ))}
         </ul>
       </div>
