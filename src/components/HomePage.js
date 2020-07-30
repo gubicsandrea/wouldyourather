@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Question from "./Question";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 class HomePage extends Component {
   state = {
@@ -34,19 +37,25 @@ class HomePage extends Component {
       : unansweredQuestionIds;
 
     return (
-      <div>
-        <h1>Home page</h1>
-        <button onClick={this.handleButtonClick}>
-          {this.state.buttonText}
-        </button>
-        <ul>
+      <React.Fragment>
+        <Row>
+          <Col>
+            <h1>Home page</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Button variant="success" onClick={this.handleButtonClick} block>
+              {this.state.buttonText}
+            </Button>
+          </Col>
+        </Row>
+        <Row>
           {questionIds.map(id => (
-            <li key={id}>
-              <Question questionId={id} />
-            </li>
+            <Question key={id} questionId={id} />
           ))}
-        </ul>
-      </div>
+        </Row>
+      </React.Fragment>
     );
   }
 }

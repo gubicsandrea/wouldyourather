@@ -15,3 +15,15 @@ code {
 img {
   width: 40px;
 }
+
+.card img {
+  width: 74px;
+}
+
+.navbar.navbar-expand-sm.navbar-light {
+  padding: 0;
+}
+
+.card-footer a:hover {
+  text-decoration: none;
+}

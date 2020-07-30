@@ -5,8 +5,9 @@ import { handleInitialData } from "../actions/shared";
 import LoadingBar from "react-redux-loading";
 import LoginPage from "./LoginPage";
 import HomePage from "./HomePage";
-import Nav from "./Nav";
+import Navigation from "./Navigation";
 import Poll from "./Poll";
+import Container from "react-bootstrap/Container";
 
 class App extends Component {
   componentDidMount() {
@@ -19,12 +20,12 @@ class App extends Component {
         <Fragment>
           <LoadingBar />
           {loading === true ? null : (
-            <div>
-              <Nav />
+            <Container>
+              <Navigation />
               <Route path="/" exact component={HomePage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/question/:id" component={Poll} />
-            </div>
+            </Container>
           )}
         </Fragment>
       </Router>

@@ -1,18 +1,50 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
 
 class Question extends Component {
   render() {
     const { question, author, questionId } = this.props;
     const toPollLink = `/question/${questionId}`;
     return (
-      <div>
-        {author.name} asks:
-        <img src={author.avatarURL} alt={author.name} />
-        Would you rather ...{question.optionOne.text.substring(0, 20)}...
-        <Link to={toPollLink}>View Poll</Link>
-      </div>
+      <Col sm={12} md={4}>
+        <Card>
+          <Card.Header>{author.name} asks:</Card.Header>
+          <Card.Body>
+            <Container>
+              <Row>
+                <Col sm={4}>
+                  <Image
+                    src={author.avatarURL}
+                    alt={author.name}
+                    roundedCircle
+                  />
+                </Col>
+                <Col sm={8}>
+                  <h5>Would you rather</h5>
+                  <p>
+                    ...{question.optionOne.text.substring(0, 20)}
+                    ...
+                  </p>
+                </Col>
+              </Row>
+            </Container>
+          </Card.Body>
+          <Card.Footer>
+            <Link to={toPollLink}>
+              <Button variant="outline-success" block>
+                View Poll
+              </Button>
+            </Link>
+          </Card.Footer>
+        </Card>
+      </Col>
     );
   }
 }
