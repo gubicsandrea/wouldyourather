@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
 import PollForm from "./PollForm";
 import PollResult from "./PollResult";
 
@@ -13,16 +18,34 @@ class Poll extends Component {
     }
 
     return (
-      <div>
-        {author.name} asks:
-        <img src={author.avatarURL} alt={author.name} />
-        <h2>Would you rather...</h2>
-        {answer === null ? (
-          <PollForm questionId={question.id} />
-        ) : (
-          <PollResult question={question} answer={answer} />
-        )}
-      </div>
+      <Row className="justify-content-md-center">
+        <Col md={8} lg={6}>
+          <Card>
+            <Card.Header>{author.name} asks:</Card.Header>
+            <Card.Body>
+              <Container>
+                <Row>
+                  <Col sm="auto">
+                    <Image
+                      src={author.avatarURL}
+                      alt={author.name}
+                      roundedCircle
+                    />
+                  </Col>
+                  <Col>
+                    <Card.Title>Would you rather...</Card.Title>
+                    {answer === null ? (
+                      <PollForm questionId={question.id} />
+                    ) : (
+                      <PollResult question={question} answer={answer} />
+                    )}
+                  </Col>
+                </Row>
+              </Container>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     );
   }
 }

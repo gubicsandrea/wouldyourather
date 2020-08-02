@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
 import { Redirect } from "react-router-dom";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 class LoginPage extends Component {
   state = {
@@ -41,20 +46,32 @@ class LoginPage extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <div>
-        <h1>Login page</h1>
-        <form onSubmit={this.handleLogin}>
-          <input
-            type="text"
-            value={username}
-            onChange={this.handleChange}
-            placeholder="Enter your username"
-          />
-          <button type="submit" disabled={username === ""}>
-            Log in
-          </button>
-        </form>
-      </div>
+      <Row className="justify-content-md-center">
+        <Col md={8} lg={6}>
+          <Card>
+            <Card.Header>Please log in</Card.Header>
+            <Form onSubmit={this.handleLogin} style={{ margin: "1rem" }}>
+              <Form.Group>
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={username}
+                  onChange={this.handleChange}
+                  placeholder="Enter your username"
+                />
+              </Form.Group>
+              <Button
+                variant="outline-success"
+                type="submit"
+                disabled={username === ""}
+                block
+              >
+                Log in
+              </Button>
+            </Form>
+          </Card>
+        </Col>
+      </Row>
     );
   }
 }

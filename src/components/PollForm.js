@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { handleSaveQuestionAnswer } from "../actions/shared";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 class PollForm extends Component {
   state = {
@@ -27,32 +29,37 @@ class PollForm extends Component {
   render() {
     const { question } = this.props;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Check
           type="radio"
           id="optionOne"
-          value="optionOne"
           name="option"
+          value="optionOne"
+          label={question.optionOne.text}
           onChange={e => this.handleChangeSelection(e.target.value)}
         />
-        <label htmlFor="optionOne">{question.optionOne.text}</label>
-        <input
+        <Form.Check
           type="radio"
           id="optionTwo"
-          value="optionTwo"
           name="option"
+          value="optionTwo"
+          label={question.optionTwo.text}
           onChange={e => this.handleChangeSelection(e.target.value)}
         />
-        <label htmlFor="optionTwo">{question.optionTwo.text}</label>
-        <button type="submit" disabled={this.state.option === ""}>
+        <Button
+          variant="outline-success"
+          type="submit"
+          disabled={this.state.option === ""}
+          block
+        >
           Submit
-        </button>
-      </form>
+        </Button>
+      </Form>
     );
   }
 }
 
-function mapStateToProps({ authedUser, questions, users }, { questionId }) {
+function mapStateToProps({ authedUser, questions }, { questionId }) {
   return {
     authedUser,
     question: authedUser ? questions[questionId] : {}

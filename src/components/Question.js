@@ -13,20 +13,20 @@ class Question extends Component {
     const { question, author, questionId } = this.props;
     const toPollLink = `/question/${questionId}`;
     return (
-      <Col sm={12} md={4}>
+      <Col sm={12} md={6} lg={4}>
         <Card>
           <Card.Header>{author.name} asks:</Card.Header>
           <Card.Body>
             <Container>
               <Row>
-                <Col sm={4}>
+                <Col sm="auto">
                   <Image
                     src={author.avatarURL}
                     alt={author.name}
                     roundedCircle
                   />
                 </Col>
-                <Col sm={8}>
+                <Col>
                   <h5>Would you rather</h5>
                   <p>
                     ...{question.optionOne.text.substring(0, 20)}
