@@ -8,6 +8,7 @@ import HomePage from "./HomePage";
 import Navigation from "./Navigation";
 import Poll from "./Poll";
 import NewQuestionPage from "./NewQuestionPage";
+import Leaderboard from "./Leaderboard";
 import Container from "react-bootstrap/Container";
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
               <Route path="/login" component={LoginPage} />
               <Route path="/question/:id" component={Poll} />
               <Route path="/add" component={NewQuestionPage} />
+              <Route path="/leaderboard" component={Leaderboard} />
             </Container>
           )}
         </Fragment>
