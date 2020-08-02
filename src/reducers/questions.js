@@ -1,6 +1,7 @@
 import {
   GET_QUESTIONS,
-  SET_USER_ANSWER_ON_QUESTION
+  SET_USER_ANSWER_ON_QUESTION,
+  SAVE_NEW_QUESTION
 } from "../actions/questions";
 
 export default function questions(state = {}, action) {
@@ -22,6 +23,11 @@ export default function questions(state = {}, action) {
             ])
           }
         }
+      };
+    case SAVE_NEW_QUESTION:
+      return {
+        ...state,
+        [action.question.id]: action.question
       };
     default:
       return state;

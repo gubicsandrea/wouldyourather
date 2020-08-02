@@ -1,6 +1,10 @@
-import { getUsers, saveQuestionAnswerOnUser } from "./users";
-import { getQuestions, setUserAnswerOnQuestion } from "./questions";
-import { getInitialData, saveQuestionAnswer } from "../utils/api";
+import { getUsers, saveQuestionAnswerOnUser, addQuestion } from "./users";
+import {
+  getQuestions,
+  setUserAnswerOnQuestion,
+  saveNewQuestion
+} from "./questions";
+import { getInitialData, saveQuestionAnswer, saveQuestion } from "../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading";
 
 export function handleInitialData() {
@@ -25,6 +29,30 @@ export function handleSaveQuestionAnswer({ userId, questionId, answer }) {
       .then(() => {
         dispatch(saveQuestionAnswerOnUser(userId, questionId, answer));
         dispatch(setUserAnswerOnQuestion(userId, questionId, answer));
+        dispatch(hideLoading());
+      })
+      .catch(() => {
+        alert("Unexpected error, please try again");
+        dispatch(hideLoading());
+      });
+  };
+}
+
+export function handleSaveNewQuestion({
+  optionOneText,
+  optionTwoText,
+  author
+}) {
+  return dispatch => {
+    dispatch(showLoading());
+    return saveQuestion({
+      optionOneText,
+      optionTwoText,
+      author
+    })
+      .then(question => {
+        dispatch(saveNewQuestion(question));
+        dispatch(addQuestion(author, question.id));
         dispatch(hideLoading());
       })
       .catch(() => {
