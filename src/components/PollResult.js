@@ -15,7 +15,11 @@ export default function PollResult({ question, answer }) {
         const now = ((option.votes.length / numberOfVotes) * 100).toFixed(1);
         const voted = answer === availableAnswers[index];
         return (
-          <Card border="success" className={voted ? "lightgreen" : "white"}>
+          <Card
+            border="success"
+            className={voted ? "lightgreen" : "white"}
+            key={index}
+          >
             <Row>
               <Col>{option.text}</Col>
               {voted && (
