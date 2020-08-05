@@ -63,19 +63,27 @@ class HomePage extends Component {
 function mapStateToProps({ authedUser, questions, users }) {
   const answeredQuestionIds =
     authedUser !== null
-      ? Object.keys(questions).filter(
-          id =>
-            questions[id].optionOne.votes.includes(authedUser) ||
-            questions[id].optionTwo.votes.includes(authedUser)
-        )
+      ? Object.keys(questions)
+          .filter(
+            id =>
+              questions[id].optionOne.votes.includes(authedUser) ||
+              questions[id].optionTwo.votes.includes(authedUser)
+          )
+          .sort(
+            (id1, id2) => questions[id2].timestamp - questions[id1].timestamp
+          )
       : [];
   const unansweredQuestionIds =
     authedUser !== null
-      ? Object.keys(questions).filter(
-          id =>
-            !questions[id].optionOne.votes.includes(authedUser) &&
-            !questions[id].optionTwo.votes.includes(authedUser)
-        )
+      ? Object.keys(questions)
+          .filter(
+            id =>
+              !questions[id].optionOne.votes.includes(authedUser) &&
+              !questions[id].optionTwo.votes.includes(authedUser)
+          )
+          .sort(
+            (id1, id2) => questions[id2].timestamp - questions[id1].timestamp
+          )
       : [];
   return {
     authedUser,
