@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
 import LoadingBar from "react-redux-loading";
@@ -10,6 +10,7 @@ import Poll from "./Poll";
 import NewQuestionPage from "./NewQuestionPage";
 import Leaderboard from "./Leaderboard";
 import Container from "react-bootstrap/Container";
+import NoMatchPage from "./NoMatchPage";
 
 class App extends Component {
   componentDidMount() {
@@ -24,11 +25,14 @@ class App extends Component {
           {loading === true ? null : (
             <Container>
               <Navigation />
-              <Route path="/" exact component={HomePage} />
-              <Route path="/login" component={LoginPage} />
-              <Route path="/question/:id" component={Poll} />
-              <Route path="/add" component={NewQuestionPage} />
-              <Route path="/leaderboard" component={Leaderboard} />
+              <Switch>
+                <Route path="/" exact component={HomePage} />
+                <Route path="/login" component={LoginPage} />
+                <Route path="/question/:id" component={Poll} />
+                <Route path="/add" component={NewQuestionPage} />
+                <Route path="/leaderboard" component={Leaderboard} />
+                <Route component={NoMatchPage} />
+              </Switch>
             </Container>
           )}
         </Fragment>
