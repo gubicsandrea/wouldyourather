@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
-import { Redirect } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -41,9 +40,11 @@ class LoginPage extends Component {
 
   render() {
     const { username, success } = this.state;
+    const { history, location } = this.props;
+    const { from } = location.state || { from: { pathName: "/" } };
 
     if (success === true) {
-      return <Redirect to="/" />;
+      history.replace(from);
     }
     return (
       <Row className="justify-content-md-center">

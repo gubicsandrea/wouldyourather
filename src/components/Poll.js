@@ -8,13 +8,25 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import PollForm from "./PollForm";
 import PollResult from "./PollResult";
+import NoMatchPage from "./NoMatchPage";
 
 class Poll extends Component {
   render() {
-    const { authedUser, author, question, answer } = this.props;
+    const { authedUser, validId, author, question, answer } = this.props;
 
     if (!authedUser) {
-      return <Redirect to="/login" />;
+      return (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { from: `/question/${question.id}` }
+          }}
+        />
+      );
+    }
+
+    if (!validId) {
+      return <NoMatchPage />;
     }
 
     return (
@@ -52,12 +64,15 @@ class Poll extends Component {
 
 function mapStateToProps({ authedUser, questions, users }, props) {
   const { id } = props.match.params;
+  const validId = questions.hasOwnProperty(id);
+  const question = validId ? questions[id] : { id };
   const answered = authedUser && users[authedUser].answers.hasOwnProperty(id);
   const answer = answered ? users[authedUser].answers[id] : null;
   return {
     authedUser,
-    question: authedUser ? questions[id] : {},
-    author: authedUser ? users[questions[id].author] : {},
+    validId,
+    question: authedUser ? question : { id },
+    author: authedUser && validId ? users[questions[id].author] : {},
     answer
   };
 }

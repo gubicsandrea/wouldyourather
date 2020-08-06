@@ -7,7 +7,11 @@ class LeaderBoard extends Component {
   render() {
     const { authedUser, userResults } = this.props;
     if (!authedUser) {
-      return <Redirect to="/login" />;
+      return (
+        <Redirect
+          to={{ pathname: "/login", state: { from: "/leaderboard" } }}
+        />
+      );
     }
 
     return (
